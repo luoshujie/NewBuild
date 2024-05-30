@@ -1,4 +1,5 @@
 using System;
+using Configs;
 using UnityEngine;
 
 [Serializable]
@@ -15,6 +16,8 @@ public class BuildBase
     public Vector3 pos;
     public float angle;
 
+    public BuildConfig config;
+
     public BuildBase(int build_id, int build_Type, Vector3 pos, float angle)
     {
         Init(build_id, build_Type, pos, angle);
@@ -27,26 +30,27 @@ public class BuildBase
         build_Time = TimeUtils.GetCurrentTimestamp();
         this.pos = pos;
         this.angle = angle;
+        config = GlobalConfig.GetBuildConfigByType(build_Type);
         ShowModel();
     }
 
     public virtual void ShowModel()
     {
-        if (this.model == null || String.Compare(this.model.gameObject.name, "Cube", StringComparison.Ordinal) != 1)
+        if (this.model == null || String.Compare(this.model.gameObject.name, config.name, StringComparison.Ordinal) != 1)
         {
-            GameObject prefab = Resources.Load<GameObject>("Cube");
+            GameObject prefab = Resources.Load<GameObject>(config.res);
             this.model = GameObject.Instantiate(prefab);
-            this.model.gameObject.name = build_Id.ToString();
+            this.model.gameObject.name = config.name;
 //            this.model.transform.SetParent();
         }
 
         this.model.transform.position = pos;
-        this.model.transform.eulerAngles = new Vector3(0, angle, 0);
+        this.model.transform.eulerAngles = new Vector3(-90, angle, -90);
     }
 
     public void ClickModel()
     {
-        Debug.LogWarning(this.build_Id);
+        Debug.LogWarning(this.config.name);
     }
     
     public void Destroy()

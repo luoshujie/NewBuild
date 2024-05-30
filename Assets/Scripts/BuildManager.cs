@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Configs;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CurBuildData
 {
@@ -52,13 +54,15 @@ public class BuildManager : MonoBehaviour
         {
             CancelPreviewBuild();
             curBuildData = new CurBuildData();
+            curBuildData.build_Type = Random.Range(1, 13);
         }
 
         if (curBuildData != null)
         {
             if (curBuildData.model == null)
             {
-                GameObject prefab = Resources.Load<GameObject>("Cube");
+                BuildConfig config = GlobalConfig.GetBuildConfigByType(curBuildData.build_Type);
+                GameObject prefab = Resources.Load<GameObject>(config.res);
                 curBuildData.model = GameObject.Instantiate(prefab);
             }
 
