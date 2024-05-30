@@ -9,6 +9,7 @@
         <e p="Scripts" t="Include">
           <e p="BuildBase.cs" t="Include" />
           <e p="BuildManager.cs" t="Include" />
+          <e p="ColliderTrigger.cs" t="Include" />
           <e p="Configs" t="Include">
             <e p="GlobalConfig.cs" t="Include" />
           </e>

@@ -33,6 +33,8 @@ public class BuildManager : MonoBehaviour
     public float cell_x = 0.2f;
     public float cell_y = 0.2f;
 
+    public ColliderTrigger ColliderTrigger;
+
     private void Awake()
     {
         instance = this;
@@ -42,7 +44,6 @@ public class BuildManager : MonoBehaviour
     {
         BuildList = new List<BuildBase>();
     }
-
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse2))
@@ -64,6 +65,9 @@ public class BuildManager : MonoBehaviour
                 BuildConfig config = GlobalConfig.GetBuildConfigByType(curBuildData.build_Type);
                 GameObject prefab = Resources.Load<GameObject>(config.res);
                 curBuildData.model = GameObject.Instantiate(prefab);
+                BoxCollider collider = curBuildData.model.GetComponent<BoxCollider>();
+                collider.isTrigger = true;
+                ColliderTrigger = curBuildData.model.AddComponent<ColliderTrigger>();
             }
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -97,8 +101,22 @@ public class BuildManager : MonoBehaviour
         {
             if (curBuildData != null && curBuildData.model != null)
             {
-                AddBuild(curBuildData.build_Type, curBuildData.pos);
-                CancelPreviewBuild();
+                if (ColliderTrigger != null && !ColliderTrigger.IsTriggerNow())
+                {
+                    AddBuild(curBuildData.build_Type, curBuildData.pos);
+                    CancelPreviewBuild();
+                }
+                else
+                {
+                    if (ColliderTrigger == null)
+                    {
+                        Debug.LogWarning("trigger is null");
+                    }
+                    else
+                    {
+                        Debug.LogWarning(ColliderTrigger.IsTriggerNow());
+                    }
+                }
             }
             else
             {
