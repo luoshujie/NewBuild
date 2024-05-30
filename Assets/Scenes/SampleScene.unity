@@ -276,7 +276,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 38
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -302,13 +302,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5817681, y: 0, z: 0, w: 0.81335473}
-  m_LocalPosition: {x: 0, y: 74.8, z: -25.2}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.4, y: 85.9, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 71.15, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &964678123
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,6 +338,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611263a26de6e41449d71f2805c05fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildList: []
+  cell_x: 0.2
+  cell_y: 0.2
+  onlyBuildId: 0
 --- !u!4 &964678125
 Transform:
   m_ObjectHideFlags: 0
@@ -365,9 +369,9 @@ GameObject:
   - component: {fileID: 1190158879}
   - component: {fileID: 1190158878}
   - component: {fileID: 1190158877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
